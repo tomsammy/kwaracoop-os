@@ -1,5 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "outputDirectory": ".",
   "rewrites": [
     { "source": "/ministry", "destination": "/ministry_portal.html" },
     { "source": "/society", "destination": "/society_admin_portal.html" },
