@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KwaraCoop OS — Cooperative Banking &amp; Supervision</title>
+  <link rel="icon" type="image/png" href="ceresense_favicon.png">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+    h1, h2, h3, .font-display { font-family: 'Space Grotesk', system-ui, sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .hero-mesh {
+      background-color: #f8fafc;
+      background-image:
+        radial-gradient(at 10% 15%, rgba(16, 185, 129, 0.12) 0px, transparent 48%),
+        radial-gradient(at 90% 15%, rgba(14, 165, 233, 0.10) 0px, transparent 45%),
+        radial-gradient(at 55% 85%, rgba(245, 158, 11, 0.08) 0px, transparent 50%);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased min-h-screen flex flex-col justify-between selection:bg-emerald-600 selection:text-white">
+
+  <!-- Clean Unified Top Navigation -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-600 to-emerald-900 text-white flex items-center justify-center shadow-md shadow-emerald-900/20">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.5l8 3.5v6c0 5.25-3.4 9.75-8 11-4.6-1.25-8-5.75-8-11V6l8-3.5z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <div>
+          <span class="font-display font-bold text-lg text-slate-900 tracking-tight">KwaraCoop<span class="text-emerald-700">OS</span></span>
+          <span class="block text-xs text-slate-500">Kwara State Cooperative Platform</span>
+        </div>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-1.5 text-xs font-semibold" aria-label="Primary">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">Overview</a>
+        <a href="ministry_portal.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Ministry Regulator</a>
+        <a href="society_admin_portal.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Society Desk</a>
+        <a href="member_banking_dashboard.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Member Bank</a>
+        <a href="field_agent_pos.html" class="px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">Field POS &amp; USSD</a>
+      </nav>
+
+      <div class="flex items-center gap-2.5">
+        <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+          16 LGAs Online
+        </span>
+        <a href="member_banking_dashboard.html" class="px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold transition-all shadow-sm">
+          Open Member App
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1">
+
+    <!-- Visual Hero Section -->
+    <section class="hero-mesh border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+
+          <!-- Left Visual Copy (Concise & Scannable) -->
+          <div class="lg:col-span-6 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-emerald-200 shadow-sm text-emerald-800 text-xs font-bold">
+              <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+              </svg>
+              Statewide Digital Cooperative Ecosystem
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight leading-[1.1]">
+              Digital Banking &amp; Governance for <span class="text-emerald-700">Kwara Cooperatives</span>
+            </h1>
+
+            <p class="text-base text-slate-600 max-w-xl">
+              Connecting the Ministry, cooperative societies, members, and rural market agents on one unified real-time platform.
+            </p>
+
+            <!-- Compact Visual Stats Row -->
+            <div class="grid grid-cols-3 gap-3 pt-1">
+              <div class="rounded-2xl bg-white border border-slate-200 p-3.5 shadow-sm">
+                <div class="flex items-center gap-2 text-emerald-700 mb-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                  <span class="text-xs font-semibold text-slate-500">Societies</span>
+                </div>
+                <p class="font-display text-2xl font-bold text-slate-900 font-mono">1,482</p>
+              </div>
+              <div class="rounded-2xl bg-white border border-slate-200 p-3.5 shadow-sm">
+                <div class="flex items-center gap-2 text-blue-700 mb-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                  <span class="text-xs font-semibold text-slate-500">Members</span>
+                </div>
+                <p class="font-display text-2xl font-bold text-slate-900 font-mono">194.2k</p>
+              </div>
+              <div class="rounded-2xl bg-white border border-slate-200 p-3.5 shadow-sm">
+                <div class="flex items-center gap-2 text-amber-600 mb-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  <span class="text-xs font-semibold text-slate-500">Assets</span>
+                </div>
+                <p class="font-display text-2xl font-bold text-slate-900 font-mono">₦16.8B</p>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 pt-1">
+              <a href="#portals" class="px-6 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-sm shadow-lg shadow-emerald-900/20 transition-all inline-flex items-center gap-2">
+                Explore Portals
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+              </a>
+              <a href="ministry_portal.html" class="px-5 py-3 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-bold text-sm shadow-sm transition-all inline-flex items-center gap-2">
+                <svg class="w-4 h-4 text-blue-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11m16-11v11"/></svg>
+                Ministry Command
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Visual Photo Card -->
+          <div class="lg:col-span-6">
+            <div class="relative rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-2xl shadow-slate-900/10">
+              <img src="assets/hero_coop.jpg" alt="Kwara cooperative members using mobile banking at agro market" class="w-full h-[360px] sm:h-[400px] object-cover object-center">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/15 to-transparent"></div>
+
+              <!-- Overlay Quick Telemetry Pills -->
+              <div class="absolute top-4 left-4 right-4 flex items-center justify-between gap-2">
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-white/95 backdrop-blur px-3 py-1 text-xs font-bold text-slate-900 shadow-sm">
+                  <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                  Ilorin • Patigi • Offa • Kaiama
+                </span>
+                <span class="rounded-full bg-emerald-700/95 backdrop-blur px-3 py-1 text-xs font-bold text-white shadow-sm">
+                  98.4% Compliance
+                </span>
+              </div>
+
+              <!-- Bottom Senatorial Bar Overlay -->
+              <div class="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/95 backdrop-blur-md p-4 shadow-lg border border-white/60">
+                <div class="grid grid-cols-3 gap-4 text-xs">
+                  <div>
+                    <div class="flex justify-between font-bold text-slate-800 mb-1"><span>Central</span><span class="font-mono text-emerald-700">52%</span></div>
+                    <div class="h-1.5 rounded-full bg-slate-200 overflow-hidden"><div class="h-full bg-emerald-600 rounded-full" style="width: 52%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between font-bold text-slate-800 mb-1"><span>South</span><span class="font-mono text-blue-700">28%</span></div>
+                    <div class="h-1.5 rounded-full bg-slate-200 overflow-hidden"><div class="h-full bg-blue-600 rounded-full" style="width: 28%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between font-bold text-slate-800 mb-1"><span>North</span><span class="font-mono text-amber-600">20%</span></div>
+                    <div class="h-1.5 rounded-full bg-slate-200 overflow-hidden"><div class="h-full bg-amber-500 rounded-full" style="width: 20%"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual 4-Portal Selector -->
+    <section id="portals" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">Interactive Workspaces</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Select a Portal</h2>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-semibold text-slate-600">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+          Live Interactive Demo Data
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- CARD 1: MINISTRY -->
+        <a href="ministry_portal.html" class="group rounded-3xl bg-white border border-slate-200 hover:border-blue-500 p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between space-y-5">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 border border-blue-100 flex items-center justify-center group-hover:bg-blue-700 group-hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11m16-11v11M8 14v3m4-3v3m4-3v3"/></svg>
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700">Regulator</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-700">Ministry Command</h3>
+              <p class="text-xs text-slate-500 mt-1">16 LGAs Oversight &amp; Audit</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700">Credit Bureau</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700">e-Audits</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700">Subsidies</span>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-700">
+            <span>Open Portal</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+          </div>
+        </a>
+
+        <!-- CARD 2: SOCIETY DESK -->
+        <a href="society_admin_portal.html" class="group rounded-3xl bg-white border border-slate-200 hover:border-indigo-500 p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between space-y-5">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-700 border border-indigo-100 flex items-center justify-center group-hover:bg-indigo-700 group-hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700">ExCo Desk</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-700">Society Operations</h3>
+              <p class="text-xs text-slate-500 mt-1">Loans, Vaults &amp; AGM Payouts</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700">Loan Queue</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700">Dividends</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700">Agro Store</span>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-indigo-700">
+            <span>Open Portal</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+          </div>
+        </a>
+
+        <!-- CARD 3: MEMBER BANK -->
+        <a href="member_banking_dashboard.html" class="group rounded-3xl bg-white border border-slate-200 hover:border-emerald-600 p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between space-y-5">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 border border-emerald-100 flex items-center justify-center group-hover:bg-emerald-700 group-hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700">Member App</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-emerald-700">Member Core Bank</h3>
+              <p class="text-xs text-slate-500 mt-1">NUBAN Wallet, Thrift &amp; Loans</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700">NUBAN Card</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700">Target Vaults</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700">SMS Alerts</span>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-emerald-700">
+            <span>Open Portal</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+          </div>
+        </a>
+
+        <!-- CARD 4: FIELD POS & USSD -->
+        <a href="field_agent_pos.html" class="group rounded-3xl bg-white border border-slate-200 hover:border-amber-500 p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between space-y-5">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 border border-amber-100 flex items-center justify-center group-hover:bg-amber-600 group-hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700">Rural Edge</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-amber-700">Field POS &amp; USSD</h3>
+              <p class="text-xs text-slate-500 mt-1">Offline Cash &amp; *384*24# Channel</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700">Thermal POS</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700">Offline Sync</span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700">*384*24#</span>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-amber-700">
+            <span>Open Portal</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- Visual Ecosystem Strip (Icons + Visual Metrics, Zero Long Prose) -->
+      <div class="rounded-3xl bg-slate-900 text-white p-6 sm:p-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+          </div>
+          <div>
+            <p class="font-display text-lg font-bold">BVN &amp; NIN Verified</p>
+            <p class="text-xs text-slate-400">Cross-LGA credit &amp; identity protection</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/></svg>
+          </div>
+          <div>
+            <p class="font-display text-lg font-bold">Instant NIBSS NIP</p>
+            <p class="text-xs text-slate-400">Dedicated member wallets &amp; SMS receipts</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.288 15.038a5.25 5.25 0 017.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 011.06 0z"/></svg>
+          </div>
+          <div>
+            <p class="font-display text-lg font-bold">Offline-First Edge</p>
+            <p class="text-xs text-slate-400">POS sync + 2G USSD across rural wards</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-5 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+      <div class="flex items-center gap-2.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+        <span class="font-semibold text-slate-700">KwaraCoop OS</span>
+        <span>&bull; Kwara State Cooperative Digital Ecosystem</span>
+      </div>
+      <span>16 LGAs &bull; Live Interactive Demo</span>
+    </div>
+  </footer>
+
+</body>
+</html>

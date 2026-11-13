@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/ministry", "destination": "/ministry_portal.html" },
+    { "source": "/society", "destination": "/society_admin_portal.html" },
+    { "source": "/member", "destination": "/member_banking_dashboard.html" },
+    { "source": "/pos", "destination": "/field_agent_pos.html" },
+    { "source": "/ussd", "destination": "/field_agent_pos.html" }
+  ]
+}

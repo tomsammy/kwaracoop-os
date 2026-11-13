@@ -1,0 +1,21 @@
+{
+  "name": "kwaracoop-os",
+  "version": "1.0.0",
+  "description": "Kwara State Cooperative Management and Regulatory Information System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node kwaracoop_simulation_test.js",
+    "migrate": "node legacy_data_migration.js"
+  },
+  "keywords": [
+    "cooperative",
+    "core-banking",
+    "kwara-state",
+    "ussd",
+    "fintech",
+    "regulatory"
+  ],
+  "author": "Kwara State Ministry of Business, Innovation and Technology",
+  "license": "UNLICENSED"
+}

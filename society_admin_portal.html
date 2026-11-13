@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Society Operations Desk — KwaraCoop OS</title>
+  <link rel="icon" type="image/png" href="ceresense_favicon.png">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+    h1, h2, h3, .font-display { font-family: 'Space Grotesk', system-ui, sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+  </style>
+  <script src="demo_shared.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased min-h-screen flex flex-col">
+
+  <!-- Clean Unified Top Navigation -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 px-4 py-2.5 sm:px-6">
+      <a href="index.html" class="flex items-center gap-2.5 shrink-0">
+        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-700 text-white shadow-sm">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <div>
+          <span class="block font-display text-sm font-bold tracking-tight text-slate-900">KwaraCoop OS</span>
+          <span class="block text-xs font-medium text-indigo-700">Society Operations</span>
+        </div>
+      </a>
+
+      <nav class="hidden items-center gap-1.5 lg:flex" aria-label="Primary">
+        <a href="index.html" class="rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">Overview</a>
+        <a href="ministry_portal.html" class="rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">Ministry Regulator</a>
+        <a href="society_admin_portal.html" class="rounded-lg border border-indigo-200 bg-indigo-50 px-3 py-1.5 text-xs font-bold text-indigo-800">Society Desk</a>
+        <a href="member_banking_dashboard.html" class="rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">Member Bank</a>
+        <a href="field_agent_pos.html" class="rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">Field POS &amp; USSD</a>
+      </nav>
+
+      <div class="flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1">
+        <span class="h-2 w-2 rounded-full bg-indigo-600"></span>
+        <span class="text-xs font-semibold text-indigo-900">Ilorin West CTCS</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <div class="max-w-7xl mx-auto w-full flex-1 px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- Left Sidebar -->
+    <aside class="lg:col-span-3 space-y-5">
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-700 to-slate-900 text-white flex items-center justify-center font-bold text-base shadow-sm">
+            BG
+          </div>
+          <div>
+            <h2 class="text-sm font-bold text-slate-900">Mallam Bello Garba</h2>
+            <p class="text-xs text-slate-500">Society President</p>
+          </div>
+        </div>
+        <div class="pt-3 border-t border-slate-100 space-y-1.5 text-xs">
+          <div class="flex justify-between"><span class="text-slate-500">Rating</span><span class="font-bold text-emerald-700">Grade A (98%)</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Members</span><span class="font-bold text-slate-900 font-mono">1,240</span></div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="bg-white rounded-2xl border border-slate-200 p-2.5 shadow-sm space-y-1 text-sm font-semibold">
+        <button onclick="switchTab('loans')" id="tab-loans" class="w-full text-left px-3.5 py-2.5 rounded-xl bg-indigo-50 text-indigo-800 flex items-center justify-between transition-colors cursor-pointer">
+          <span class="flex items-center gap-3">
+            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Loan Queue
+          </span>
+          <span class="px-2 py-0.5 rounded-full text-xs bg-amber-100 text-amber-800 font-bold" id="pendingLoansBadge">2</span>
+        </button>
+
+        <button onclick="switchTab('reconcile')" id="tab-reconcile" class="w-full text-left px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 flex items-center gap-3 transition-colors cursor-pointer">
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          Cash Vault
+        </button>
+
+        <button onclick="switchTab('dividend')" id="tab-dividend" class="w-full text-left px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 flex items-center gap-3 transition-colors cursor-pointer">
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          AGM Dividends
+        </button>
+
+        <button onclick="switchTab('commodities')" id="tab-commodities" class="w-full text-left px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 flex items-center gap-3 transition-colors cursor-pointer">
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          Agro-Input Store
+        </button>
+
+        <button onclick="switchTab('statutory')" id="tab-statutory" class="w-full text-left px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 flex items-center gap-3 transition-colors cursor-pointer">
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Ministry e-Audit
+        </button>
+      </nav>
+    </aside>
+
+    <!-- Main Column -->
+    <main class="lg:col-span-9 space-y-6">
+
+      <!-- Icon KPIs -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500 font-semibold">Savings Pool</span>
+            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75"/></svg>
+            </div>
+          </div>
+          <div class="text-xl font-bold text-slate-900 font-mono mt-2">₦84,250,000</div>
+          <span class="text-xs text-emerald-700 font-semibold">1,240 Members</span>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500 font-semibold">Loan Portfolio</span>
+            <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0"/></svg>
+            </div>
+          </div>
+          <div class="text-xl font-bold text-amber-600 font-mono mt-2" id="kpiLoanPortfolio">₦38,100,000</div>
+          <span class="text-xs text-slate-500">98.2% Performing</span>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500 font-semibold">Vault Reserve</span>
+            <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-700 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6"/></svg>
+            </div>
+          </div>
+          <div class="text-xl font-bold text-emerald-700 font-mono mt-2" id="kpiBankReserve">₦28,450,000</div>
+          <span class="text-xs text-slate-500">Providus Linked</span>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500 font-semibold">Net Surplus</span>
+            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75"/></svg>
+            </div>
+          </div>
+          <div class="text-xl font-bold text-blue-700 font-mono mt-2">₦7,820,000</div>
+          <span class="text-xs text-blue-700 font-semibold">AGM Ready</span>
+        </div>
+      </div>
+
+      <!-- TAB 1: LOAN APPROVAL DESK -->
+      <div id="content-loans" class="space-y-4">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+            <h2 class="text-lg font-bold text-slate-900">Loan Approval Queue</h2>
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-800 border border-indigo-200" id="queueHeaderBadge">
+              2 Ready
+            </span>
+          </div>
+
+          <div class="space-y-4" id="loanQueue">
+            <!-- Loan 1 -->
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4" id="loan-card-1">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                <div class="flex items-center gap-3">
+                  <img src="assets/member_avatar.jpg" alt="Alhaji Ahmed Aliyu" class="w-11 h-11 rounded-full object-cover border-2 border-emerald-200">
+                  <div>
+                    <span class="text-xs font-mono font-bold text-indigo-700">#KWCP-LN-2026-104</span>
+                    <h3 class="text-base font-bold text-slate-900">Alhaji Ahmed Aliyu</h3>
+                    <p class="text-xs text-slate-500">Irrigation Pump &amp; Maize Seedlings</p>
+                  </div>
+                </div>
+                <div class="text-left sm:text-right">
+                  <span class="text-xl font-bold text-emerald-700 font-mono">₦300,000.00</span>
+                  <span class="text-xs block text-slate-500">12 Mos @ 5% &bull; EMI ₦26,250</span>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-white border border-slate-200">
+                  <span class="text-slate-500 block">Thrift Equity</span>
+                  <span class="font-bold text-emerald-700 font-mono">₦420,000</span>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-slate-200">
+                  <span class="text-slate-500 block">2x Limit</span>
+                  <span class="font-bold text-slate-900 font-mono">₦840,000</span>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-slate-200">
+                  <span class="text-slate-500 block">Guarantor 1</span>
+                  <span class="font-bold text-slate-900">Dr. Rasheedat</span>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-slate-200">
+                  <span class="text-slate-500 block">Guarantor 2</span>
+                  <span class="font-bold text-slate-900">Mrs. Folashade</span>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2.5">
+                <button onclick="approveLoan(1, 'Alhaji Ahmed Aliyu', 300000)" class="flex-1 py-2.5 px-4 bg-emerald-700 hover:bg-emerald-600 text-white font-bold rounded-xl text-xs shadow-sm transition-colors cursor-pointer">
+                  Approve &amp; Disburse
+                </button>
+                <button onclick="KwaraToast.show('Returned to Member', 'Adjustment request sent to Alhaji Ahmed Aliyu.', 'warning')" class="py-2.5 px-4 bg-white hover:bg-slate-100 border border-slate-300 text-slate-700 font-semibold rounded-xl text-xs transition-colors cursor-pointer">
+                  Query
+                </button>
+              </div>
+            </div>
+
+            <!-- Loan 2 -->
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4" id="loan-card-2">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-11 h-11 rounded-full bg-indigo-100 text-indigo-800 flex items-center justify-center font-bold text-sm">ZO</div>
+                  <div>
+                    <span class="text-xs font-mono font-bold text-indigo-700">#KWCP-LN-2026-105</span>
+                    <h3 class="text-base font-bold text-slate-900">Mrs. Zainab Olarinoye</h3>
+                    <p class="text-xs text-slate-500">Mandate Market Stall &amp; Yam Bulk</p>
+                  </div>
+                </div>
+                <div class="text-left sm:text-right">
+                  <span class="text-xl font-bold text-emerald-700 font-mono">₦200,000.00</span>
+                  <span class="text-xs block text-slate-500">6 Mos @ 5% &bull; EMI ₦34,166</span>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-white border border-slate-200">
+                  <span class="text-slate-500 block">Thrift Equity</span>
+                  <span class="font-bold text-emerald-700 font-mono">₦260,000</span>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-slate-200">
+                  <span class="text-slate-500 block">2x Limit</span>
+                  <span class="font-bold text-slate-900 font-mono">₦520,000</span>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-slate-200">
+                  <span class="text-slate-500 block">Guarantors</span>
+                  <span class="font-bold text-slate-900">2 Signed</span>
+                </div>
+                <div class="p-3 rounded-xl bg-white border border-slate-200">
+                  <span class="text-slate-500 block">Credit Bureau</span>
+                  <span class="font-bold text-emerald-700">0 Defaults</span>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2.5">
+                <button onclick="approveLoan(2, 'Mrs. Zainab Olarinoye', 200000)" class="flex-1 py-2.5 px-4 bg-emerald-700 hover:bg-emerald-600 text-white font-bold rounded-xl text-xs shadow-sm transition-colors cursor-pointer">
+                  Approve &amp; Disburse
+                </button>
+                <button onclick="KwaraToast.show('Returned to Member', 'Query sent to Mrs. Zainab Olarinoye.', 'warning')" class="py-2.5 px-4 bg-white hover:bg-slate-100 border border-slate-300 text-slate-700 font-semibold rounded-xl text-xs transition-colors cursor-pointer">
+                  Query
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: CASH VAULT -->
+      <div id="content-reconcile" class="hidden space-y-4">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
+          <h2 class="text-lg font-bold text-slate-900">Field Agent Cash Remittance</h2>
+
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <img src="assets/agent_avatar.jpg" alt="Agent Abdulrahman" class="w-12 h-12 rounded-full object-cover border-2 border-emerald-200">
+                <div>
+                  <span class="text-xs font-mono font-bold text-indigo-700">#POS-KW-2026-11-12</span>
+                  <h3 class="text-base font-bold text-slate-900">Agent Abdulrahman &bull; Mandate Market</h3>
+                  <p class="text-xs text-slate-500">34 POS Receipts &bull; Closed 17:45</p>
+                </div>
+              </div>
+              <div class="text-left sm:text-right">
+                <span class="text-xs text-slate-500 block">Cash to Vault</span>
+                <span class="text-2xl font-bold font-mono text-emerald-700">₦68,000.00</span>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-white border border-slate-200 flex flex-wrap justify-between items-center gap-2 text-xs">
+              <span class="font-mono font-bold text-slate-700">HASH: 8F4B-91C2-39E1A</span>
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">34 / 34 Receipts Matched</span>
+            </div>
+
+            <button onclick="reconcileBatch()" id="reconcileBtn" class="w-full py-3 bg-emerald-700 hover:bg-emerald-600 text-white font-bold rounded-xl text-xs shadow-sm transition-colors cursor-pointer">
+              Confirm Vault Receipt
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: AGM DIVIDENDS -->
+      <div id="content-dividend" class="hidden space-y-4">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-bold text-slate-900">AGM Surplus Distribution</h2>
+            <span class="px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-bold">25% Reserve Rule</span>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
+            <div class="flex justify-between font-bold text-slate-900">
+              <label for="surplusSlider">Annual Net Surplus:</label>
+              <span class="text-base font-mono text-emerald-700" id="surplusValText">₦7,820,000</span>
+            </div>
+            <input type="range" id="surplusSlider" min="2000000" max="20000000" step="100000" value="7820000" oninput="recalcDividends()" class="w-full accent-indigo-600 cursor-pointer">
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+            <div class="p-4 rounded-2xl bg-blue-50 border border-blue-200 space-y-1">
+              <span class="font-bold text-blue-800 block">25% Statutory Reserve</span>
+              <span class="text-xl font-bold font-mono text-blue-900" id="divReserve">₦1,955,000</span>
+            </div>
+            <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-1">
+              <span class="font-bold text-emerald-800 block">Share Dividend (37.5%)</span>
+              <span class="text-xl font-bold font-mono text-emerald-900" id="divShare">₦2,932,500</span>
+            </div>
+            <div class="p-4 rounded-2xl bg-indigo-50 border border-indigo-200 space-y-1">
+              <span class="font-bold text-indigo-800 block">Patronage Rebate (37.5%)</span>
+              <span class="text-xl font-bold font-mono text-indigo-900" id="divPatronage">₦2,932,500</span>
+            </div>
+          </div>
+
+          <button onclick="executeDividendPayout()" class="w-full py-3 bg-indigo-700 hover:bg-indigo-600 text-white font-bold rounded-xl text-xs shadow-sm transition-colors cursor-pointer">
+            Disburse to 1,240 Member Wallets
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 4: AGRO-INPUT STORE (Visual SVG Product Illustrations) -->
+      <div id="content-commodities" class="hidden space-y-4">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
+          <h2 class="text-lg font-bold text-slate-900">Agro-Input Depot Inventory</h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+            <!-- Fertilizer -->
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                  <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                </div>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold">In Stock</span>
+              </div>
+              <h3 class="font-bold text-slate-900 text-sm">NPK 20:10:10 Fertilizer</h3>
+              <div class="text-2xl font-bold font-mono text-slate-900"><span id="stockFert">420</span> Bags</div>
+              <p class="text-slate-500">₦18,500 / Bag</p>
+              <button onclick="dispenseItem('stockFert', 5, '5 Bags NPK Fertilizer')" class="w-full py-2.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl font-bold transition-colors cursor-pointer">
+                Issue 5 Bags
+              </button>
+            </div>
+
+            <!-- Seeds -->
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center">
+                  <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-12c-3 0-5-2-5-5 3 0 5 2 5 5zm0 6c3 0 5-2 5-5-3 0-5 2-5 5z"/></svg>
+                </div>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold">In Stock</span>
+              </div>
+              <h3 class="font-bold text-slate-900 text-sm">FARO 44 Rice Seeds</h3>
+              <div class="text-2xl font-bold font-mono text-slate-900"><span id="stockSeeds">180</span> Packs</div>
+              <p class="text-slate-500">₦12,000 / 50kg Pack</p>
+              <button onclick="dispenseItem('stockSeeds', 2, '2 Packs Rice Seeds')" class="w-full py-2.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl font-bold transition-colors cursor-pointer">
+                Issue 2 Packs
+              </button>
+            </div>
+
+            <!-- Tractor -->
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center">
+                  <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25"/></svg>
+                </div>
+                <span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 font-semibold">Available</span>
+              </div>
+              <h3 class="font-bold text-slate-900 text-sm">Tractor Hire Slots</h3>
+              <div class="text-2xl font-bold font-mono text-slate-900"><span id="stockTractor">6</span> Slots</div>
+              <p class="text-slate-500">₦30,000 / Hectare</p>
+              <button onclick="dispenseItem('stockTractor', 1, '1 Tractor Slot')" class="w-full py-2.5 bg-blue-700 hover:bg-blue-600 text-white rounded-xl font-bold transition-colors cursor-pointer">
+                Book 1 Hectare
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 5: MINISTRY E-AUDIT -->
+      <div id="content-statutory" class="hidden space-y-4">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
+          <h2 class="text-lg font-bold text-slate-900">Annual Statutory Returns</h2>
+
+          <div class="p-5 rounded-2xl bg-emerald-50 border border-emerald-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="space-y-1">
+              <span class="px-2.5 py-0.5 rounded-full text-xs bg-emerald-200 text-emerald-900 font-bold">2026 Ledger Balanced</span>
+              <h3 class="text-sm font-bold text-slate-900 pt-1">Audited Financial Dossier Ready</h3>
+              <p class="text-xs text-slate-600">Receipt <span class="font-mono font-bold">#KW-TAX-9821</span> &bull; 1,240 Member Ledgers Reconciled</p>
+            </div>
+            <button onclick="submitAudit()" id="auditSubmitBtn" class="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-sm whitespace-nowrap cursor-pointer">
+              Transmit to Ministry
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    let pendingCount = 2;
+    let activeLoanPortfolio = 38100000;
+    let bankBalance = 28450000;
+
+    function switchTab(tab) {
+      ['loans', 'reconcile', 'dividend', 'commodities', 'statutory'].forEach(t => {
+        document.getElementById(`content-${t}`).classList.add('hidden');
+        document.getElementById(`tab-${t}`).className = 'w-full text-left px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 flex items-center justify-between transition-colors cursor-pointer';
+      });
+      document.getElementById(`content-${tab}`).classList.remove('hidden');
+      document.getElementById(`tab-${tab}`).className = 'w-full text-left px-3.5 py-2.5 rounded-xl bg-indigo-50 text-indigo-800 flex items-center justify-between transition-colors cursor-pointer';
+    }
+
+    function approveLoan(id, name, amt) {
+      const card = document.getElementById(`loan-card-${id}`);
+      card.innerHTML = `<div class="flex items-center gap-3 text-emerald-800 text-xs font-bold"><span>Disbursed: ₦${amt.toLocaleString()} credited to ${name}.</span></div>`;
+      card.className = 'p-4 rounded-2xl bg-emerald-50 border border-emerald-200';
+      pendingCount = Math.max(0, pendingCount - 1);
+      document.getElementById('pendingLoansBadge').innerText = pendingCount;
+      document.getElementById('queueHeaderBadge').innerText = `${pendingCount} Ready`;
+      activeLoanPortfolio += amt;
+      document.getElementById('kpiLoanPortfolio').innerText = '₦' + activeLoanPortfolio.toLocaleString();
+      KwaraToast.show('Loan Disbursed', `₦${amt.toLocaleString()} credited to ${name}.`, 'success');
+    }
+
+    function reconcileBatch() {
+      bankBalance += 68000;
+      document.getElementById('kpiBankReserve').innerText = '₦' + bankBalance.toLocaleString();
+      const btn = document.getElementById('reconcileBtn');
+      btn.disabled = true;
+      btn.innerText = 'Settled in Society Vault';
+      btn.className = 'w-full py-3 bg-emerald-100 text-emerald-800 font-bold rounded-xl text-xs border border-emerald-300 cursor-default';
+      KwaraToast.show('Vault Settled', '₦68,000 reconciled across 34 member receipts.', 'success');
+    }
+
+    function recalcDividends() {
+      const total = parseInt(document.getElementById('surplusSlider').value);
+      document.getElementById('surplusValText').innerText = '₦' + total.toLocaleString();
+      document.getElementById('divReserve').innerText = '₦' + Math.round(total * 0.25).toLocaleString();
+      document.getElementById('divShare').innerText = '₦' + Math.round(total * 0.375).toLocaleString();
+      document.getElementById('divPatronage').innerText = '₦' + Math.round(total * 0.375).toLocaleString();
+    }
+
+    function executeDividendPayout() {
+      KwaraToast.show('Dividends Disbursed', 'Surplus credited to 1,240 member wallets.', 'success');
+    }
+
+    function dispenseItem(elId, qty, label) {
+      const el = document.getElementById(elId);
+      let current = parseInt(el.innerText);
+      if (current < qty) {
+        KwaraToast.show('Low Stock', `Not enough stock for ${label}.`, 'warning');
+        return;
+      }
+      el.innerText = current - qty;
+      KwaraToast.show('Issued', `${label} allocated to Alhaji Ahmed Aliyu.`, 'info');
+    }
+
+    function submitAudit() {
+      const btn = document.getElementById('auditSubmitBtn');
+      btn.disabled = true;
+      btn.innerText = 'Transmitted (#AUDIT-KW-2026-0481)';
+      btn.className = 'px-5 py-2.5 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl border border-emerald-300';
+      KwaraToast.show('e-Audit Transmitted', 'Submitted to Ministry Registry.', 'success');
+    }
+  </script>
+</body>
+</html>

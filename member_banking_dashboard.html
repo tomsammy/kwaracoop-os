@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Core Banking — KwaraCoop OS</title>
+  <link rel="icon" type="image/png" href="ceresense_favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <script src="demo_shared.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { background-color: #f8fafc; color: #0f172a; }
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+    .metallic-card {
+      background: linear-gradient(135deg, #064e3b 0%, #047857 48%, #0f172a 100%);
+      box-shadow: 0 20px 40px -15px rgba(4, 120, 87, 0.35);
+    }
+    .nav-pill-active {
+      background-color: #ecfdf5;
+      color: #065f46;
+      border-color: #a7f3d0;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-emerald-100 selection:text-emerald-900">
+
+  <!-- Clean Unified Navigation Bar -->
+  <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2.5 sm:px-6">
+      <a href="index.html" class="flex items-center gap-2.5 shrink-0">
+        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-700 text-white shadow-sm">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+          </svg>
+        </div>
+        <div>
+          <span class="block font-display text-sm font-bold tracking-tight text-slate-900">KwaraCoop OS</span>
+          <span class="block text-xs font-medium text-emerald-700">Member Core Bank</span>
+        </div>
+      </a>
+
+      <nav class="hidden items-center gap-1.5 lg:flex" aria-label="Primary">
+        <a href="index.html" class="rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">Overview</a>
+        <a href="ministry_portal.html" class="rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">Ministry Regulator</a>
+        <a href="society_admin_portal.html" class="rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">Society Desk</a>
+        <a href="member_banking_dashboard.html" class="rounded-lg border px-3 py-1.5 text-xs font-bold nav-pill-active">Member Bank</a>
+        <a href="field_agent_pos.html" class="rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">Field POS &amp; USSD</a>
+      </nav>
+
+      <div class="flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1">
+        <span class="h-2 w-2 rounded-full bg-emerald-600"></span>
+        <span class="text-xs font-semibold text-emerald-900">Alhaji A. Aliyu</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:py-8">
+
+    <!-- Member Header Strip with Portrait -->
+    <section class="mb-6 flex flex-col justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm lg:flex-row lg:items-center">
+      <div class="flex items-center gap-4">
+        <img src="assets/member_avatar.jpg" alt="Alhaji Ahmed Aliyu" class="h-14 w-14 shrink-0 rounded-2xl object-cover ring-2 ring-emerald-500/30 shadow-sm">
+        <div>
+          <div class="flex flex-wrap items-center gap-2">
+            <h1 class="font-display text-xl font-bold text-slate-900 sm:text-2xl">Alhaji Ahmed Aliyu</h1>
+            <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-800 border border-emerald-200">
+              <svg class="h-3.5 w-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              BVN / NIN Verified
+            </span>
+          </div>
+          <p class="mt-0.5 text-xs sm:text-sm text-slate-600">
+            Ilorin West Farmers CTCS &bull; <span class="font-mono font-semibold text-slate-800">KW/ILW/2024/0481</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2.5">
+        <button type="button" onclick="openModal('depositModal')" class="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-4 py-2.5 text-xs font-bold text-white shadow-sm transition hover:bg-emerald-800 cursor-pointer">
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+          Deposit
+        </button>
+        <button type="button" onclick="openModal('transferModal')" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-xs font-bold text-slate-800 shadow-sm transition hover:bg-slate-50 cursor-pointer">
+          <svg class="h-4 w-4 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
+          Transfer
+        </button>
+        <button type="button" onclick="document.getElementById('loanSection').scrollIntoView({behavior:'smooth'})" class="inline-flex items-center gap-2 rounded-xl border border-amber-300 bg-amber-50 px-4 py-2.5 text-xs font-bold text-amber-900 transition hover:bg-amber-100 cursor-pointer">
+          <svg class="h-4 w-4 text-amber-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75" /></svg>
+          New Loan
+        </button>
+      </div>
+    </section>
+
+    <!-- Primary Banking Hero Grid: Metallic NUBAN Card + 3 Core Ledgers -->
+    <section class="mb-8 grid grid-cols-1 gap-5 lg:grid-cols-12">
+      <!-- Metallic Virtual Bank Card -->
+      <div class="metallic-card relative overflow-hidden rounded-2xl p-6 text-white lg:col-span-5">
+        <div class="pointer-events-none absolute -right-12 -top-12 h-44 w-44 rounded-full bg-emerald-400/15 blur-2xl"></div>
+        <div class="pointer-events-none absolute -bottom-16 -left-10 h-44 w-44 rounded-full bg-amber-400/10 blur-2xl"></div>
+
+        <div class="relative flex items-start justify-between">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-emerald-200">NUBAN Wallet</p>
+            <p class="mt-0.5 font-display text-lg font-bold text-white">Providus Bank</p>
+          </div>
+          <div class="rounded-lg border border-white/20 bg-white/10 px-2.5 py-1 text-xs font-semibold text-emerald-100">
+            Tier 3 Active
+          </div>
+        </div>
+
+        <div class="relative mt-6">
+          <p class="text-xs font-medium text-emerald-100/80">Liquid Balance</p>
+          <p id="walletBalanceDisplay" class="mt-1 font-display text-3xl font-bold tracking-tight tabular-nums sm:text-4xl">₦48,500.00</p>
+        </div>
+
+        <div class="relative mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-white/15 pt-4">
+          <div>
+            <p class="text-xs text-emerald-100/75">Account No.</p>
+            <div class="mt-0.5 flex items-center gap-2">
+              <span id="nubanNumber" class="font-mono text-base font-bold tracking-wider">9920 148 291</span>
+              <button type="button" onclick="copyNuban()" class="rounded-md bg-white/15 px-2 py-0.5 text-xs font-semibold text-white transition hover:bg-white/25 cursor-pointer">
+                Copy
+              </button>
+            </div>
+          </div>
+          <div class="text-right">
+            <p class="text-xs text-emerald-100/75">Net Equity</p>
+            <p id="netEquityDisplay" class="mt-0.5 font-mono text-base font-bold text-amber-300 tabular-nums">₦558,500.00</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Ledger Cards -->
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:col-span-7">
+        <!-- Regular Thrift -->
+        <div class="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Regular Thrift</span>
+              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+              </div>
+            </div>
+            <p id="thriftBalanceDisplay" class="mt-3 font-display text-2xl font-bold text-slate-900 tabular-nums">₦420,000.00</p>
+            <p class="mt-1 text-xs text-slate-600">2x Power: <span id="collateralLimitText" class="font-semibold text-emerald-700">₦840,000</span></p>
+          </div>
+          <div class="mt-4 rounded-xl bg-slate-50 p-2.5 text-xs text-slate-600">
+            Monthly: <span class="font-semibold text-slate-900">₦15,000</span> Auto-Split
+          </div>
+        </div>
+
+        <!-- Target Vaults -->
+        <div class="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Target Vaults</span>
+              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-50 text-amber-700">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
+              </div>
+            </div>
+            <p id="targetTotalDisplay" class="mt-3 font-display text-2xl font-bold text-slate-900 tabular-nums">₦215,000.00</p>
+            <p class="mt-1 text-xs text-slate-600"><span id="vaultCountText" class="font-semibold text-amber-700">2 Goals</span> &bull; +8% Yield</p>
+          </div>
+          <button type="button" onclick="openModal('newVaultModal')" class="mt-4 w-full rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-bold text-amber-900 transition hover:bg-amber-100 cursor-pointer">
+            + New Goal Vault
+          </button>
+        </div>
+
+        <!-- Active Loan -->
+        <div class="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Active Loan</span>
+              <span class="rounded-full bg-blue-50 px-2 py-0.5 text-xs font-bold text-blue-700">#LN-904</span>
+            </div>
+            <p id="activeLoanDisplay" class="mt-3 font-display text-2xl font-bold text-slate-900 tabular-nums">₦125,000.00</p>
+            <p class="mt-1 text-xs text-slate-600">EMI: <span class="font-semibold text-slate-900">₦25,000</span> (May 28)</p>
+          </div>
+          <button type="button" onclick="repayLoanInstallment()" class="mt-4 w-full rounded-xl bg-slate-900 px-3 py-2 text-xs font-bold text-white transition hover:bg-slate-800 cursor-pointer">
+            Pay ₦25,000 Now
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Interactive Workspace -->
+    <section class="grid grid-cols-1 gap-6 lg:grid-cols-12">
+
+      <!-- Left Column (7 cols): Target Savings + Loan Engine -->
+      <div class="space-y-6 lg:col-span-7">
+
+        <!-- Target Savings Vaults -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div class="mb-4 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-50 text-amber-700">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33" /></svg>
+              </div>
+              <h2 class="font-display text-lg font-bold text-slate-900">Target Savings Vaults</h2>
+            </div>
+            <button type="button" onclick="openModal('newVaultModal')" class="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-800 cursor-pointer">
+              + Create
+            </button>
+          </div>
+
+          <div id="vaultsContainer" class="space-y-4">
+            <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4" data-vault-id="ileya">
+              <div class="flex flex-wrap items-start justify-between gap-2">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-sm font-bold text-slate-900">Ileya Ram Fund</h3>
+                    <span class="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-800">Locked Jun 2027</span>
+                  </div>
+                  <p class="mt-1 text-xs text-slate-600"><span id="ileyaAmtText" class="font-mono font-bold text-slate-900">₦145,000</span> / ₦200,000 (<span id="ileyaPctText">72.5%</span>)</p>
+                </div>
+                <button type="button" onclick="topUpVault('ileya', 10000)" class="rounded-lg bg-emerald-700 px-3 py-1.5 text-xs font-bold text-white hover:bg-emerald-800 cursor-pointer">
+                  + ₦10,000
+                </button>
+              </div>
+              <div class="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-slate-200">
+                <div id="ileyaBar" class="h-full rounded-full bg-emerald-600 transition-all duration-300" style="width: 72.5%"></div>
+              </div>
+            </div>
+
+            <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4" data-vault-id="agro">
+              <div class="flex flex-wrap items-start justify-between gap-2">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-sm font-bold text-slate-900">2027 Maize &amp; Rice Seedlings</h3>
+                    <span class="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-800">Agro-Store</span>
+                  </div>
+                  <p class="mt-1 text-xs text-slate-600"><span id="agroAmtText" class="font-mono font-bold text-slate-900">₦70,000</span> / ₦100,000 (<span id="agroPctText">70.0%</span>)</p>
+                </div>
+                <button type="button" onclick="topUpVault('agro', 10000)" class="rounded-lg bg-emerald-700 px-3 py-1.5 text-xs font-bold text-white hover:bg-emerald-800 cursor-pointer">
+                  + ₦10,000
+                </button>
+              </div>
+              <div class="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-slate-200">
+                <div id="agroBar" class="h-full rounded-full bg-amber-500 transition-all duration-300" style="width: 70%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instant Loan Calculator -->
+        <div id="loanSection" class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div class="mb-4 flex items-center justify-between">
+            <h2 class="font-display text-lg font-bold text-slate-900">Quick Loan Request</h2>
+            <span class="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-800">
+              Max: ₦840,000 (5% p.a.)
+            </span>
+          </div>
+
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <div class="flex items-center justify-between">
+              <label for="loanAmountSlider" class="text-xs font-bold uppercase tracking-wider text-slate-600">Principal</label>
+              <span id="loanAmountLabel" class="font-display text-2xl font-bold text-emerald-700 tabular-nums">₦300,000</span>
+            </div>
+            <input id="loanAmountSlider" type="range" min="50000" max="840000" step="10000" value="300000" oninput="recalcLoan()" class="mt-3 h-2 w-full cursor-pointer appearance-none rounded-lg bg-emerald-200 accent-emerald-700">
+
+            <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <div>
+                <label for="loanTenureSelect" class="block text-xs font-semibold text-slate-600">Tenure</label>
+                <select id="loanTenureSelect" onchange="recalcLoan()" class="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800">
+                  <option value="6">6 Months</option>
+                  <option value="12" selected>12 Months</option>
+                  <option value="18">18 Months</option>
+                </select>
+              </div>
+              <div class="rounded-lg border border-slate-200 bg-white p-2.5">
+                <p class="text-xs text-slate-500">Monthly EMI</p>
+                <p id="monthlyEmiValue" class="mt-0.5 font-mono text-sm font-bold text-slate-900 tabular-nums">₦26,250.00</p>
+              </div>
+              <div class="rounded-lg border border-slate-200 bg-white p-2.5">
+                <p class="text-xs text-slate-500">Total Interest</p>
+                <p id="totalInterestValue" class="mt-0.5 font-mono text-sm font-bold text-emerald-700 tabular-nums">₦15,000.00</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div class="flex items-center justify-between rounded-xl border border-slate-200 p-3">
+              <div>
+                <p class="text-xs font-bold text-slate-900">Dr. Rasheedat Salau</p>
+                <p class="text-xs text-slate-500">Thrift: ₦510,000</p>
+              </div>
+              <span class="rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">Signed</span>
+            </div>
+            <div class="flex items-center justify-between rounded-xl border border-slate-200 p-3">
+              <div>
+                <p class="text-xs font-bold text-slate-900">Mrs. Folashade Adebayo</p>
+                <p class="text-xs text-slate-500">Thrift: ₦380,000</p>
+              </div>
+              <span class="rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">Signed</span>
+            </div>
+          </div>
+
+          <div class="mt-4 flex justify-end">
+            <button type="button" onclick="submitLoanApplication()" class="w-full sm:w-auto rounded-xl bg-emerald-700 px-6 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-emerald-800 cursor-pointer">
+              Submit Loan Application
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column (5 cols): Alerts + Statement -->
+      <div class="space-y-6 lg:col-span-5">
+
+        <!-- Live Alerts -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div class="mb-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="relative flex h-2.5 w-2.5">
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-600"></span>
+              </span>
+              <h2 class="font-display text-base font-bold text-slate-900">Live Alerts</h2>
+            </div>
+            <span class="text-xs font-semibold text-slate-500">SMS + App</span>
+          </div>
+
+          <div id="alertsFeed" class="space-y-3">
+            <div class="rounded-xl border border-emerald-200 bg-emerald-50/70 p-3.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-emerald-900">Payroll Split Credited</span>
+                <span class="font-mono text-emerald-700">09:14</span>
+              </div>
+              <p class="mt-1 text-xs text-slate-700">₦15,000 Thrift &bull; ₦25,000 Loan #LN-904</p>
+            </div>
+            <div class="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-slate-900">NIP Inflow</span>
+                <span class="font-mono text-slate-500">Yesterday</span>
+              </div>
+              <p class="mt-1 text-xs text-slate-700">+₦35,000 from Mandate Grain Buyers</p>
+            </div>
+            <div class="rounded-xl border border-amber-200 bg-amber-50/70 p-3.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-amber-900">AGM Dividend</span>
+                <span class="font-mono text-amber-700">May 02</span>
+              </div>
+              <p class="mt-1 text-xs text-slate-700">+₦28,400 credited to Liquid Wallet</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Account Statement -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div class="mb-4 flex items-center justify-between">
+            <h2 class="font-display text-base font-bold text-slate-900">Statement</h2>
+            <button type="button" onclick="KwaraToast.show('Statement Ready', 'Digital e-Statement downloaded.', 'info')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 cursor-pointer">
+              Export CSV
+            </button>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead>
+                <tr class="border-b border-slate-200 text-slate-500">
+                  <th class="pb-2 font-semibold">Item</th>
+                  <th class="pb-2 font-semibold">Ledger</th>
+                  <th class="pb-2 text-right font-semibold">Amount</th>
+                </tr>
+              </thead>
+              <tbody id="statementBody" class="divide-y divide-slate-100">
+                <tr>
+                  <td class="py-3 font-medium text-slate-900">Payroll Split</td>
+                  <td class="py-3 text-slate-600">Thrift + Loan</td>
+                  <td class="py-3 text-right font-mono font-bold text-emerald-700">+₦40,000</td>
+                </tr>
+                <tr>
+                  <td class="py-3 font-medium text-slate-900">Mandate Market</td>
+                  <td class="py-3 text-slate-600">Wallet</td>
+                  <td class="py-3 text-right font-mono font-bold text-emerald-700">+₦35,000</td>
+                </tr>
+                <tr>
+                  <td class="py-3 font-medium text-slate-900">Ileya Target</td>
+                  <td class="py-3 text-slate-600">Vault</td>
+                  <td class="py-3 text-right font-mono font-bold text-slate-700">₦10,000</td>
+                </tr>
+                <tr>
+                  <td class="py-3 font-medium text-slate-900">NPK Fertilizer</td>
+                  <td class="py-3 text-slate-600">Agro-Store</td>
+                  <td class="py-3 text-right font-mono font-bold text-rose-600">-₦18,500</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Deposit Modal -->
+  <div id="depositModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+    <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-display text-lg font-bold text-slate-900">Deposit Funds</h3>
+        <button type="button" onclick="closeModal('depositModal')" class="rounded-lg p-1 text-slate-400 hover:bg-slate-100 cursor-pointer">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+      <div class="mt-4 space-y-4">
+        <div>
+          <label for="depositDest" class="block text-xs font-bold text-slate-700">Destination</label>
+          <select id="depositDest" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2.5 text-xs font-semibold text-slate-800">
+            <option value="wallet">Liquid Wallet (9920 148 291)</option>
+            <option value="thrift">Regular Thrift (+2x Loan Power)</option>
+          </select>
+        </div>
+        <div>
+          <label for="depositAmt" class="block text-xs font-bold text-slate-700">Amount (₦)</label>
+          <input id="depositAmt" type="number" min="500" step="500" value="25000" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2.5 font-mono text-sm font-bold text-slate-900">
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="closeModal('depositModal')" class="rounded-xl border border-slate-200 px-4 py-2 text-xs font-bold text-slate-700 cursor-pointer">Cancel</button>
+          <button type="button" onclick="executeDeposit()" class="rounded-xl bg-emerald-700 px-5 py-2 text-xs font-bold text-white hover:bg-emerald-800 cursor-pointer">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Transfer Modal -->
+  <div id="transferModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+    <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-display text-lg font-bold text-slate-900">Bank Transfer</h3>
+        <button type="button" onclick="closeModal('transferModal')" class="rounded-lg p-1 text-slate-400 hover:bg-slate-100 cursor-pointer">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+      <div class="mt-4 space-y-4">
+        <div>
+          <label for="transferBank" class="block text-xs font-bold text-slate-700">Bank</label>
+          <select id="transferBank" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2.5 text-xs font-semibold text-slate-800">
+            <option>First Bank of Nigeria</option>
+            <option>GTBank</option>
+            <option>Zenith Bank</option>
+            <option>Jaiz Bank</option>
+          </select>
+        </div>
+        <div>
+          <label for="transferAcct" class="block text-xs font-bold text-slate-700">Account</label>
+          <input id="transferAcct" type="text" value="3049182745 — Ahmed Aliyu" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2.5 font-mono text-xs font-semibold text-slate-900">
+        </div>
+        <div>
+          <label for="transferAmt" class="block text-xs font-bold text-slate-700">Amount (₦)</label>
+          <input id="transferAmt" type="number" min="500" step="500" value="12000" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2.5 font-mono text-sm font-bold text-slate-900">
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="closeModal('transferModal')" class="rounded-xl border border-slate-200 px-4 py-2 text-xs font-bold text-slate-700 cursor-pointer">Cancel</button>
+          <button type="button" onclick="executeTransfer()" class="rounded-xl bg-slate-900 px-5 py-2 text-xs font-bold text-white hover:bg-slate-800 cursor-pointer">Send NIP</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Vault Modal -->
+  <div id="newVaultModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+    <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-display text-lg font-bold text-slate-900">New Target Vault</h3>
+        <button type="button" onclick="closeModal('newVaultModal')" class="rounded-lg p-1 text-slate-400 hover:bg-slate-100 cursor-pointer">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+      <div class="mt-4 space-y-4">
+        <div>
+          <label for="newVaultName" class="block text-xs font-bold text-slate-700">Goal Name</label>
+          <input id="newVaultName" type="text" value="Children Tuition Fund" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2.5 text-xs font-semibold text-slate-900">
+        </div>
+        <div>
+          <label for="newVaultTarget" class="block text-xs font-bold text-slate-700">Target (₦)</label>
+          <input id="newVaultTarget" type="number" min="10000" step="5000" value="150000" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2.5 font-mono text-sm font-bold text-slate-900">
+        </div>
+        <div>
+          <label for="newVaultSeed" class="block text-xs font-bold text-slate-700">Initial Deposit (₦)</label>
+          <input id="newVaultSeed" type="number" min="1000" step="1000" value="10000" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2.5 font-mono text-sm font-bold text-slate-900">
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="closeModal('newVaultModal')" class="rounded-xl border border-slate-200 px-4 py-2 text-xs font-bold text-slate-700 cursor-pointer">Cancel</button>
+          <button type="button" onclick="createNewVault()" class="rounded-xl bg-amber-600 px-5 py-2 text-xs font-bold text-white hover:bg-amber-700 cursor-pointer">Launch</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const state = {
+      wallet: 48500,
+      thrift: 420000,
+      targetTotal: 215000,
+      activeLoan: 125000,
+      vaultCount: 2,
+      vaults: {
+        ileya: { current: 145000, target: 200000 },
+        agro: { current: 70000, target: 100000 }
+      }
+    };
+
+    function fmt(n) { return '₦' + Number(n).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+    function fmtShort(n) { return '₦' + Number(n).toLocaleString('en-NG', { maximumFractionDigits: 0 }); }
+
+    function updateDisplays() {
+      document.getElementById('walletBalanceDisplay').textContent = fmt(state.wallet);
+      document.getElementById('thriftBalanceDisplay').textContent = fmt(state.thrift);
+      document.getElementById('collateralLimitText').textContent = fmtShort(state.thrift * 2);
+      document.getElementById('targetTotalDisplay').textContent = fmt(state.targetTotal);
+      document.getElementById('activeLoanDisplay').textContent = fmt(state.activeLoan);
+      document.getElementById('vaultCountText').textContent = state.vaultCount + ' Goals';
+      document.getElementById('netEquityDisplay').textContent = fmt(state.wallet + state.thrift + state.targetTotal - state.activeLoan);
+    }
+
+    function addFeedAndStatement(title, detail, ledger, amountText, isCredit) {
+      const alertsFeed = document.getElementById('alertsFeed');
+      const alertBox = document.createElement('div');
+      alertBox.className = 'rounded-xl border ' + (isCredit ? 'border-emerald-200 bg-emerald-50/80' : 'border-blue-200 bg-blue-50/70') + ' p-3.5';
+      alertBox.innerHTML =
+        '<div class="flex items-center justify-between text-xs"><span class="font-bold text-slate-900">' + title + '</span><span class="font-mono text-slate-600">Now</span></div>' +
+        '<p class="mt-1 text-xs text-slate-700">' + detail + '</p>';
+      alertsFeed.prepend(alertBox);
+
+      const statementBody = document.getElementById('statementBody');
+      const row = document.createElement('tr');
+      row.innerHTML =
+        '<td class="py-3 font-medium text-slate-900">' + title + '</td>' +
+        '<td class="py-3 text-slate-600">' + ledger + '</td>' +
+        '<td class="py-3 text-right font-mono font-bold ' + (isCredit ? 'text-emerald-700' : 'text-rose-600') + '">' + amountText + '</td>';
+      statementBody.prepend(row);
+    }
+
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); document.getElementById(id).classList.add('flex'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.getElementById(id).classList.remove('flex'); }
+
+    function copyNuban() {
+      if (navigator.clipboard) navigator.clipboard.writeText('9920148291').catch(function () {});
+      KwaraToast.show('Copied', 'NUBAN 9920 148 291 copied.', 'info');
+    }
+
+    function executeDeposit() {
+      const dest = document.getElementById('depositDest').value;
+      const amt = parseFloat(document.getElementById('depositAmt').value);
+      if (!amt || amt < 500) return KwaraToast.show('Invalid', 'Minimum deposit ₦500.', 'warning');
+      if (dest === 'wallet') {
+        state.wallet += amt;
+        addFeedAndStatement('Wallet Credit', fmt(amt) + ' settled to Wallet.', 'Wallet', '+' + fmtShort(amt), true);
+      } else {
+        state.thrift += amt;
+        addFeedAndStatement('Thrift Deposit', fmt(amt) + ' added to Regular Thrift.', 'Thrift', '+' + fmtShort(amt), true);
+      }
+      updateDisplays();
+      closeModal('depositModal');
+      KwaraToast.show('Confirmed', fmt(amt) + ' deposited.', 'success');
+    }
+
+    function executeTransfer() {
+      const bank = document.getElementById('transferBank').value;
+      const amt = parseFloat(document.getElementById('transferAmt').value);
+      if (!amt || amt < 500) return KwaraToast.show('Invalid', 'Minimum ₦500.', 'warning');
+      if (amt > state.wallet) return KwaraToast.show('Low Balance', 'Wallet balance is ' + fmt(state.wallet) + '.', 'danger');
+      state.wallet -= amt;
+      updateDisplays();
+      addFeedAndStatement('Transfer to ' + bank, fmt(amt) + ' sent via NIP.', 'Wallet', '-' + fmtShort(amt), false);
+      closeModal('transferModal');
+      KwaraToast.show('Sent', fmt(amt) + ' transferred to ' + bank + '.', 'success');
+    }
+
+    function topUpVault(key, amt) {
+      if (amt > state.wallet) return KwaraToast.show('Low Balance', 'Top up Wallet first.', 'warning');
+      const v = state.vaults[key];
+      state.wallet -= amt;
+      state.targetTotal += amt;
+      v.current += amt;
+      const pct = Math.min(100, (v.current / v.target) * 100);
+      document.getElementById(key + 'AmtText').textContent = fmtShort(v.current);
+      document.getElementById(key + 'PctText').textContent = pct.toFixed(1) + '%';
+      document.getElementById(key + 'Bar').style.width = pct.toFixed(1) + '%';
+      updateDisplays();
+      addFeedAndStatement('Vault Top-Up', fmtShort(amt) + ' locked in goal.', 'Vault', '-' + fmtShort(amt), false);
+      KwaraToast.show('Funded', fmtShort(amt) + ' locked.', 'success');
+    }
+
+    function createNewVault() {
+      const name = document.getElementById('newVaultName').value.trim();
+      const target = parseFloat(document.getElementById('newVaultTarget').value);
+      const seed = parseFloat(document.getElementById('newVaultSeed').value);
+      if (!name || !target || !seed) return KwaraToast.show('Missing Info', 'Fill all fields.', 'warning');
+      if (seed > state.wallet) return KwaraToast.show('Low Balance', 'Insufficient Wallet balance.', 'danger');
+      state.wallet -= seed;
+      state.targetTotal += seed;
+      state.vaultCount += 1;
+      const pct = Math.min(100, (seed / target) * 100);
+      const container = document.getElementById('vaultsContainer');
+      const card = document.createElement('div');
+      card.className = 'rounded-xl border border-emerald-200 bg-emerald-50/40 p-4';
+      card.innerHTML =
+        '<div class="flex justify-between items-center"><h3 class="text-sm font-bold text-slate-900">' + name + '</h3><span class="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-800">Active</span></div>' +
+        '<p class="mt-1 text-xs text-slate-600"><span class="font-mono font-bold text-slate-900">' + fmtShort(seed) + '</span> / ' + fmtShort(target) + ' (' + pct.toFixed(1) + '%)</p>' +
+        '<div class="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-slate-200"><div class="h-full rounded-full bg-emerald-600" style="width:' + pct.toFixed(1) + '%"></div></div>';
+      container.prepend(card);
+      updateDisplays();
+      addFeedAndStatement('New Vault: ' + name, fmtShort(seed) + ' seeded.', 'Vault', '-' + fmtShort(seed), false);
+      closeModal('newVaultModal');
+      KwaraToast.show('Created', name + ' active.', 'success');
+    }
+
+    function repayLoanInstallment() {
+      if (state.activeLoan <= 0) return KwaraToast.show('Cleared', 'Loan balance is ₦0.', 'info');
+      if (state.wallet < 25000) return KwaraToast.show('Low Balance', 'Wallet needs ₦25,000.', 'warning');
+      const pay = Math.min(25000, state.activeLoan);
+      state.wallet -= pay;
+      state.activeLoan -= pay;
+      updateDisplays();
+      addFeedAndStatement('EMI Paid', fmt(pay) + ' applied to #LN-904.', 'Loan', '-' + fmtShort(pay), false);
+      KwaraToast.show('EMI Settled', fmt(pay) + ' paid.', 'success');
+    }
+
+    function recalcLoan() {
+      const principal = parseFloat(document.getElementById('loanAmountSlider').value);
+      const months = parseInt(document.getElementById('loanTenureSelect').value, 10);
+      const interest = principal * 0.05 * (months / 12);
+      const emi = (principal + interest) / months;
+      document.getElementById('loanAmountLabel').textContent = fmtShort(principal);
+      document.getElementById('monthlyEmiValue').textContent = fmt(emi);
+      document.getElementById('totalInterestValue').textContent = fmt(interest);
+    }
+
+    function submitLoanApplication() {
+      const principal = parseFloat(document.getElementById('loanAmountSlider').value);
+      const months = parseInt(document.getElementById('loanTenureSelect').value, 10);
+      addFeedAndStatement('Loan Requested', fmtShort(principal) + ' (' + months + ' mos) routed to Society.', 'Credit', fmtShort(principal), true);
+      KwaraToast.show('Submitted', fmtShort(principal) + ' sent to Society Desk.', 'success');
+    }
+
+    recalcLoan();
+    updateDisplays();
+  </script>
+</body>
+</html>

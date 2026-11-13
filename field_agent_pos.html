@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Field POS &amp; USSD *384*24# — KwaraCoop OS</title>
+  <link rel="icon" type="image/png" href="ceresense_favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <script src="demo_shared.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { background-color: #f8fafc; color: #0f172a; }
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+    .nav-pill-active {
+      background-color: #ecfdf5;
+      color: #065f46;
+      border-color: #a7f3d0;
+    }
+    .thermal-paper {
+      background-image: repeating-linear-gradient(180deg, #ffffff 0px, #ffffff 28px, #f8fafc 29px);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-emerald-100 selection:text-emerald-900">
+
+  <!-- Clean Unified Navigation Bar -->
+  <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2.5 sm:px-6">
+      <a href="index.html" class="flex items-center gap-2.5 shrink-0">
+        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-600 text-white shadow-sm">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+          </svg>
+        </div>
+        <div>
+          <span class="block font-display text-sm font-bold tracking-tight text-slate-900">KwaraCoop OS</span>
+          <span class="block text-xs font-medium text-amber-700">Field POS &amp; USSD</span>
+        </div>
+      </a>
+
+      <nav class="hidden items-center gap-1.5 lg:flex" aria-label="Primary">
+        <a href="index.html" class="rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">Overview</a>
+        <a href="ministry_portal.html" class="rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">Ministry Regulator</a>
+        <a href="society_admin_portal.html" class="rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">Society Desk</a>
+        <a href="member_banking_dashboard.html" class="rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">Member Bank</a>
+        <a href="field_agent_pos.html" class="rounded-lg border px-3 py-1.5 text-xs font-bold nav-pill-active">Field POS &amp; USSD</a>
+      </nav>
+
+      <div id="networkStatusPill" class="flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1">
+        <span id="networkDot" class="h-2 w-2 rounded-full bg-emerald-600"></span>
+        <span id="networkLabel" class="text-xs font-semibold text-emerald-900">Online Sync</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:py-8">
+
+    <!-- Agent Profile Header with Portrait -->
+    <section class="mb-6 flex flex-col justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm lg:flex-row lg:items-center">
+      <div class="flex items-center gap-4">
+        <img src="assets/agent_avatar.jpg" alt="Mallam Abdulrahman" class="h-14 w-14 shrink-0 rounded-2xl object-cover ring-2 ring-emerald-500/30 shadow-sm">
+        <div>
+          <div class="flex flex-wrap items-center gap-2">
+            <h1 class="font-display text-xl font-bold text-slate-900 sm:text-2xl">Mallam Abdulrahman</h1>
+            <span class="rounded-full bg-amber-50 px-2.5 py-0.5 text-xs font-bold text-amber-800 border border-amber-200">AGT-KW-042</span>
+          </div>
+          <p class="mt-0.5 text-xs sm:text-sm text-slate-600">Mandate Market Cluster &bull; Ilorin West</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-right">
+          <span class="block text-xs font-medium text-slate-500">Cash Collected</span>
+          <span id="agentCashTotal" class="font-display text-lg font-bold text-emerald-700 tabular-nums">₦68,000.00</span>
+        </div>
+        <button id="toggleOfflineBtn" type="button" onclick="toggleNetworkMode()" class="inline-flex items-center gap-2 rounded-xl border border-amber-300 bg-amber-50 px-4 py-2.5 text-xs font-bold text-amber-900 transition hover:bg-amber-100 cursor-pointer">
+          <svg class="h-4 w-4 text-amber-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.288 15.038a5.25 5.25 0 017.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 011.06 0z" /></svg>
+          Simulate Offline
+        </button>
+        <button id="syncQueueBtn" type="button" onclick="syncOfflineQueue()" class="hidden items-center gap-2 rounded-xl bg-emerald-700 px-4 py-2.5 text-xs font-bold text-white shadow-sm transition hover:bg-emerald-800 cursor-pointer">
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" /></svg>
+          Sync Now (<span id="queueCountBadge">0</span>)
+        </button>
+      </div>
+    </section>
+
+    <!-- Dual Hardware Grid -->
+    <section class="grid grid-cols-1 gap-6 lg:grid-cols-12">
+
+      <!-- Left: Android Field POS -->
+      <div class="rounded-3xl border-4 border-slate-800 bg-slate-900 p-4 shadow-xl lg:col-span-7">
+        <div class="mb-3 flex items-center justify-between px-2 text-xs text-slate-300">
+          <span class="font-mono font-semibold">FIELD POS TERMINAL</span>
+          <span class="flex items-center gap-2">
+            <span id="posQueueChip" class="rounded-full bg-slate-800 px-2.5 py-0.5 font-mono text-xs text-amber-300">Queue: 0</span>
+            <span class="font-mono text-emerald-400">92%</span>
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 rounded-2xl bg-white p-5 md:grid-cols-12">
+          <!-- POS Controls -->
+          <div class="space-y-4 md:col-span-7">
+            <div>
+              <label for="memberLookupInput" class="block text-xs font-bold uppercase tracking-wider text-slate-500">Member Phone</label>
+              <div class="mt-1.5 flex gap-2">
+                <input id="memberLookupInput" type="text" value="08039218291" class="w-full rounded-xl border border-slate-300 px-3 py-2 font-mono text-xs font-bold text-slate-900">
+                <button type="button" onclick="lookupMember()" class="rounded-xl bg-slate-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-slate-800 cursor-pointer">Find</button>
+              </div>
+              <div class="mt-2 flex flex-wrap gap-1.5">
+                <button type="button" onclick="selectPresetMember('08039218291')" class="rounded-lg border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-800 cursor-pointer">A. Aliyu</button>
+                <button type="button" onclick="selectPresetMember('08055190234')" class="rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-semibold text-slate-700 cursor-pointer">M. Bello</button>
+                <button type="button" onclick="selectPresetMember('08127740112')" class="rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-semibold text-slate-700 cursor-pointer">T. Olatunji</button>
+              </div>
+            </div>
+
+            <div class="rounded-xl border border-emerald-200 bg-emerald-50/70 p-3 flex items-center gap-3">
+              <img src="assets/member_avatar.jpg" alt="Selected Member" class="h-10 w-10 rounded-full object-cover border border-emerald-300 shrink-0">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between gap-2">
+                  <span id="posMemberName" class="text-sm font-bold text-slate-900 truncate">Alhaji Ahmed Aliyu</span>
+                  <span class="rounded-full bg-emerald-700 px-2 py-0.5 text-xs font-bold text-white shrink-0">Verified</span>
+                </div>
+                <p id="posMemberMeta" class="text-xs text-slate-600 truncate">Ilorin West &bull; Thrift ₦420,000</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label for="posTxType" class="block text-xs font-bold text-slate-600">Type</label>
+                <select id="posTxType" class="mt-1 w-full rounded-xl border border-slate-300 px-2.5 py-2 text-xs font-semibold text-slate-800">
+                  <option value="Thrift Deposit">Thrift Deposit</option>
+                  <option value="Loan Repayment">Loan Repayment</option>
+                  <option value="Target Vault">Target Vault</option>
+                </select>
+              </div>
+              <div>
+                <label for="posAmount" class="block text-xs font-bold text-slate-600">Amount (₦)</label>
+                <input id="posAmount" type="number" min="500" step="500" value="5000" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 font-mono text-sm font-bold text-slate-900">
+              </div>
+            </div>
+
+            <button type="button" onclick="collectCashPOS()" class="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-700 py-3 text-xs font-bold text-white shadow-sm transition hover:bg-emerald-800 cursor-pointer">
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0" /></svg>
+              Collect &amp; Print Receipt
+            </button>
+          </div>
+
+          <!-- Thermal Receipt -->
+          <div class="flex flex-col justify-between rounded-xl border border-dashed border-slate-300 bg-slate-50 p-3 md:col-span-5">
+            <div class="thermal-paper rounded-lg border border-slate-200 p-3 font-mono text-xs text-slate-800 shadow-inner">
+              <div class="border-b border-dashed border-slate-300 pb-2 text-center">
+                <p class="font-bold text-slate-900">KWARACOOP RECEIPT</p>
+                <p class="text-slate-500">AGT-KW-042</p>
+              </div>
+              <div class="mt-2.5 space-y-1.5">
+                <div class="flex justify-between"><span class="text-slate-500">Ref:</span><span id="rcptRef" class="font-bold">KC-POS-88241</span></div>
+                <div class="flex justify-between"><span class="text-slate-500">Member:</span><span id="rcptMember" class="font-bold">A. Aliyu</span></div>
+                <div class="flex justify-between"><span class="text-slate-500">Type:</span><span id="rcptType" class="font-semibold">Thrift Deposit</span></div>
+                <div class="flex justify-between border-t border-dashed border-slate-300 pt-1.5 text-sm">
+                  <span class="font-bold">PAID:</span>
+                  <span id="rcptAmt" class="font-bold text-emerald-700">₦5,000.00</span>
+                </div>
+                <div class="flex justify-between pt-1">
+                  <span class="text-slate-500">Status:</span>
+                  <span id="rcptSync" class="font-bold text-emerald-700">SETTLED</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <p class="text-xs font-bold text-slate-700">Recent Slips</p>
+              <ul id="posHistoryList" class="mt-1.5 space-y-1 text-xs text-slate-600">
+                <li class="flex justify-between"><span>A. Aliyu</span><span class="font-mono font-bold text-emerald-700">₦15,000</span></li>
+                <li class="flex justify-between"><span>M. Bello</span><span class="font-mono font-bold text-emerald-700">₦28,000</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Feature Phone USSD + SMS Inbox -->
+      <div class="space-y-6 lg:col-span-5">
+        <div class="mx-auto w-full max-w-sm rounded-3xl border-4 border-slate-800 bg-slate-900 p-5 text-white shadow-xl">
+          <div class="mb-3 flex items-center justify-between text-xs text-slate-400">
+            <span class="font-display font-bold text-slate-200">2G USSD HANDSET</span>
+            <span class="font-mono text-emerald-400">*384*24#</span>
+          </div>
+
+          <div class="rounded-xl border-4 border-slate-700 bg-emerald-950 p-3.5 font-mono text-xs text-emerald-100 shadow-inner">
+            <div class="mb-2 flex items-center justify-between border-b border-emerald-800 pb-1 text-emerald-400">
+              <span>KwaraCoop USSD</span>
+              <span>MTN NG</span>
+            </div>
+            <div id="ussdScreenText" class="min-h-[148px] whitespace-pre-line leading-relaxed text-emerald-50">Welcome Alhaji Aliyu
+1. Check Balances
+2. Mini Statement
+3. Target Vaults
+4. Quick Loan
+5. Sign Guarantor
+0. Reset Menu</div>
+          </div>
+
+          <div class="mt-3 flex gap-2">
+            <input id="ussdInputBox" type="text" placeholder="1-5 or 0" class="w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 font-mono text-xs font-bold text-white placeholder-slate-400">
+            <button type="button" onclick="sendUssdOption()" class="rounded-xl bg-emerald-600 px-4 py-2 text-xs font-bold text-white hover:bg-emerald-500 cursor-pointer">Send</button>
+          </div>
+
+          <div class="mt-3 grid grid-cols-3 gap-2">
+            <button type="button" onclick="quickUssd('1')" class="rounded-xl bg-slate-800 py-2 text-xs font-bold text-slate-200 hover:bg-slate-700 cursor-pointer">1 Balance</button>
+            <button type="button" onclick="quickUssd('2')" class="rounded-xl bg-slate-800 py-2 text-xs font-bold text-slate-200 hover:bg-slate-700 cursor-pointer">2 Mini Stmt</button>
+            <button type="button" onclick="quickUssd('3')" class="rounded-xl bg-slate-800 py-2 text-xs font-bold text-slate-200 hover:bg-slate-700 cursor-pointer">3 Vaults</button>
+            <button type="button" onclick="quickUssd('4')" class="rounded-xl bg-slate-800 py-2 text-xs font-bold text-slate-200 hover:bg-slate-700 cursor-pointer">4 Loan</button>
+            <button type="button" onclick="quickUssd('5')" class="rounded-xl bg-slate-800 py-2 text-xs font-bold text-slate-200 hover:bg-slate-700 cursor-pointer">5 Sign</button>
+            <button type="button" onclick="quickUssd('0')" class="rounded-xl bg-slate-700 py-2 text-xs font-bold text-amber-300 hover:bg-slate-600 cursor-pointer">0 Menu</button>
+          </div>
+        </div>
+
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="mb-3 flex items-center justify-between">
+            <h2 class="font-display text-sm font-bold text-slate-900">SMS Alerts Sent</h2>
+            <span class="rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-800">KWARACOOP</span>
+          </div>
+          <div id="smsInbox" class="space-y-2.5">
+            <div class="rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs text-slate-700">
+              <div class="flex justify-between font-bold text-slate-900">
+                <span>A. Aliyu (08039218291)</span>
+                <span class="font-mono text-slate-500">09:14</span>
+              </div>
+              <p class="mt-1">₦15,000 Thrift confirmed. Bal: ₦420,000.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const membersDB = {
+      '08039218291': { name: 'Alhaji Ahmed Aliyu', short: 'A. Aliyu', meta: 'Ilorin West • Thrift ₦420,000' },
+      '08055190234': { name: 'Hajia Mariam Bello', short: 'M. Bello', meta: 'Offa • Thrift ₦295,000' },
+      '08127740112': { name: 'Mr. Tunde Olatunji', short: 'T. Olatunji', meta: 'Omu-Aran • Thrift ₦180,000' }
+    };
+
+    let currentMember = membersDB['08039218291'];
+    let isOffline = false;
+    let offlineQueue = [];
+    let agentTotal = 68000;
+    let rcptCounter = 88242;
+
+    function selectPresetMember(phone) {
+      document.getElementById('memberLookupInput').value = phone;
+      lookupMember();
+    }
+
+    function lookupMember() {
+      const val = document.getElementById('memberLookupInput').value.trim();
+      const found = membersDB[val];
+      if (!found) return KwaraToast.show('Not Found', 'Try 08039218291, 08055190234, or 08127740112.', 'warning');
+      currentMember = found;
+      document.getElementById('posMemberName').textContent = found.name;
+      document.getElementById('posMemberMeta').textContent = found.meta;
+    }
+
+    function toggleNetworkMode() {
+      isOffline = !isOffline;
+      const pill = document.getElementById('networkStatusPill');
+      const dot = document.getElementById('networkDot');
+      const label = document.getElementById('networkLabel');
+      const btn = document.getElementById('toggleOfflineBtn');
+
+      if (isOffline) {
+        pill.className = 'flex items-center gap-2 rounded-full border border-amber-300 bg-amber-50 px-3 py-1';
+        dot.className = 'h-2 w-2 rounded-full bg-amber-600';
+        label.className = 'text-xs font-semibold text-amber-900';
+        label.textContent = 'Offline Queue Mode';
+        btn.textContent = 'Restore Signal';
+        KwaraToast.show('Offline Active', 'Receipts queuing securely on device.', 'warning');
+      } else {
+        pill.className = 'flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1';
+        dot.className = 'h-2 w-2 rounded-full bg-emerald-600';
+        label.className = 'text-xs font-semibold text-emerald-900';
+        label.textContent = 'Online Sync';
+        btn.textContent = 'Simulate Offline';
+        KwaraToast.show('Signal Restored', 'Ready to sync queued receipts.', 'success');
+      }
+      updateSyncButton();
+    }
+
+    function updateSyncButton() {
+      const syncBtn = document.getElementById('syncQueueBtn');
+      document.getElementById('queueCountBadge').textContent = offlineQueue.length;
+      document.getElementById('posQueueChip').textContent = 'Queue: ' + offlineQueue.length;
+      if (!isOffline && offlineQueue.length > 0) {
+        syncBtn.classList.remove('hidden');
+        syncBtn.classList.add('inline-flex');
+      } else {
+        syncBtn.classList.add('hidden');
+        syncBtn.classList.remove('inline-flex');
+      }
+    }
+
+    function collectCashPOS() {
+      const txType = document.getElementById('posTxType').value;
+      const amt = parseFloat(document.getElementById('posAmount').value);
+      if (!amt || amt < 500) return KwaraToast.show('Invalid', 'Minimum ₦500.', 'warning');
+
+      agentTotal += amt;
+      rcptCounter += 1;
+      const ref = 'KC-POS-' + rcptCounter;
+      const fmtAmt = '₦' + amt.toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      document.getElementById('agentCashTotal').textContent = '₦' + agentTotal.toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById('rcptRef').textContent = ref;
+      document.getElementById('rcptMember').textContent = currentMember.short;
+      document.getElementById('rcptType').textContent = txType;
+      document.getElementById('rcptAmt').textContent = fmtAmt;
+
+      const historyList = document.getElementById('posHistoryList');
+      const li = document.createElement('li');
+      li.className = 'flex justify-between';
+      li.innerHTML = '<span>' + currentMember.short + '</span><span class="font-mono font-bold text-emerald-700">₦' + amt.toLocaleString('en-NG') + '</span>';
+      historyList.prepend(li);
+
+      if (isOffline) {
+        offlineQueue.push({ ref: ref, member: currentMember.name, amount: amt, txType: txType });
+        document.getElementById('rcptSync').textContent = 'QUEUED';
+        document.getElementById('rcptSync').className = 'font-bold text-amber-700';
+        updateSyncButton();
+        KwaraToast.show('Saved Offline', ref + ' queued locally.', 'info');
+      } else {
+        document.getElementById('rcptSync').textContent = 'SETTLED';
+        document.getElementById('rcptSync').className = 'font-bold text-emerald-700';
+        appendSms(currentMember.name, txType, amt, ref);
+        KwaraToast.show('Settled', fmtAmt + ' receipt printed & SMS sent.', 'success');
+      }
+    }
+
+    function syncOfflineQueue() {
+      if (offlineQueue.length === 0) return;
+      const count = offlineQueue.length;
+      offlineQueue.forEach(item => appendSms(item.member, item.txType, item.amount, item.ref));
+      offlineQueue = [];
+      document.getElementById('rcptSync').textContent = 'SETTLED';
+      document.getElementById('rcptSync').className = 'font-bold text-emerald-700';
+      updateSyncButton();
+      KwaraToast.show('Synced', count + ' queued collections settled.', 'success');
+    }
+
+    function appendSms(memberName, txType, amt, ref) {
+      const inbox = document.getElementById('smsInbox');
+      const box = document.createElement('div');
+      box.className = 'rounded-xl border border-emerald-200 bg-emerald-50/70 p-3 text-xs text-slate-800';
+      box.innerHTML =
+        '<div class="flex justify-between font-bold text-emerald-950"><span>' + memberName + '</span><span class="font-mono text-emerald-700">Now</span></div>' +
+        '<p class="mt-1">₦' + amt.toLocaleString('en-NG') + ' ' + txType + ' (' + ref + ').</p>';
+      inbox.prepend(box);
+    }
+
+    const ussdResponses = {
+      '0': 'Welcome Alhaji Aliyu\n1. Check Balances\n2. Mini Statement\n3. Target Vaults\n4. Quick Loan\n5. Sign Guarantor\n0. Reset Menu',
+      '1': 'BALANCES:\nWallet: ₦48,500\nThrift: ₦420,000\nVaults: ₦215,000\nLoan: ₦125,000\n\n0. Back',
+      '2': 'STATEMENT:\n+₦40k Payroll\n+₦35k NIP\n-₦18.5k Agro\n\n0. Back',
+      '3': 'VAULTS:\nIleya: ₦145k/200k\nAgro: ₦70k/100k\nYield: +8%\n\n0. Back',
+      '4': 'LOAN:\nLimit: ₦840,000\n₦100,000 request sent.\n\n0. Back',
+      '5': 'GUARANTOR:\nSigned for Dr. R. Salau.\n\n0. Back'
+    };
+
+    function quickUssd(code) {
+      document.getElementById('ussdInputBox').value = code;
+      sendUssdOption();
+    }
+
+    function sendUssdOption() {
+      const code = document.getElementById('ussdInputBox').value.trim() || '0';
+      const screen = document.getElementById('ussdScreenText');
+      if (ussdResponses[code]) {
+        screen.textContent = ussdResponses[code];
+        if (code === '4' || code === '5') {
+          appendSms('Alhaji Ahmed Aliyu', 'USSD *384*24#', 0, 'USSD-OK');
+          KwaraToast.show('USSD Complete', 'Menu #' + code + ' processed.', 'success');
+        }
+      } else {
+        screen.textContent = 'Invalid choice.\n\n' + ussdResponses['0'];
+      }
+    }
+  </script>
+</body>
+</html>

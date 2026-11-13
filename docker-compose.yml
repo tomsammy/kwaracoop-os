@@ -1,0 +1,98 @@
+# ==============================================================================
+# KwaraCoop OS: Production Container Orchestration Stack
+# Kwara State Ministry of Business, Innovation and Technology
+# ==============================================================================
+
+version: '3.8'
+
+services:
+  # 1. Primary Relational Multi-Tenant Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: kwaracoop_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-kwaracoop_db}
+      POSTGRES_USER: ${POSTGRES_USER:-kwaracoop_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-KwaraStateGov2026SecurePass!}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./kwaracoop_database_schema.sql:/docker-entrypoint-initdb.d/01_init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - kwaracoop_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-kwaracoop_admin} -d ${POSTGRES_DB:-kwaracoop_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 2. Redis Cache for USSD Sessions & Queues
+  redis:
+    image: redis:7-alpine
+    container_name: kwaracoop_redis
+    restart: always
+    command: redis-server --requirepass ${REDIS_PASSWORD:-KwaraRedisPass2026!}
+    volumes:
+      - redisdata:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - kwaracoop_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-KwaraRedisPass2026!}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 3. KwaraCoop Backend API Gateway & USSD Engine
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kwaracoop_api
+    restart: always
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgres://${POSTGRES_USER:-kwaracoop_admin}:${POSTGRES_PASSWORD:-KwaraStateGov2026SecurePass!}@postgres:5432/${POSTGRES_DB:-kwaracoop_db}
+      REDIS_URL: redis://:${REDIS_PASSWORD:-KwaraRedisPass2026!}@redis:6379
+      BANK_WEBHOOK_SECRET: ${BANK_WEBHOOK_SECRET:-kwara_bank_webhook_secret_key_2026}
+      USSD_SHORTCODE: "*384*24#"
+      KWIRS_API_KEY: ${KWIRS_API_KEY:-kwirs_live_tax_api_key}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - kwaracoop_network
+    ports:
+      - "3000:3000"
+
+  # 4. Nginx Ingress Reverse Proxy & Static Portal Host
+  nginx:
+    image: nginx:alpine
+    container_name: kwaracoop_proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./:/usr/share/nginx/html:ro
+    depends_on:
+      - api
+    networks:
+      - kwaracoop_network
+
+networks:
+  kwaracoop_network:
+    driver: bridge
+
+volumes:
+  pgdata:
+    driver: local
+  redisdata:
+    driver: local

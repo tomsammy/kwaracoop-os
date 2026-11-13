@@ -1,0 +1,17 @@
+node_modules/
+.system_generated/
+.user_uploaded/
+scratch/
+*.metadata.json
+check_img.js
+download_favicon.js
+find_all_images.js
+find_logo.js
+inspect_portal.js
+test_logo_read.js
+render_pdf.js
+generate_proposal_html.js
+proposal_document.html
+KwaraCoop_Ministerial_Proposal_Ceresense.pdf
+.DS_Store
+Thumbs.db
